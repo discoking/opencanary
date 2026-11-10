@@ -68,15 +68,22 @@ if config.moduleEnabled("snmp"):
         print("Can't import SNMP. Please ensure you have Scapy installed.")
         pass
 
+# Name-resolution canaries send lookups and log whoever answers. They do not
+# need Scapy; NBT-NS and mDNS are independent of the original LLMNR switch.
 if config.moduleEnabled("llmnr"):
-    try:
-        # Module needs Scapy, but the rest of OpenCanary doesn't
-        from opencanary.modules.llmnr import CanaryLLMNR
+    from opencanary.modules.llmnr import CanaryLLMNR
 
-        MODULES.append(CanaryLLMNR)
-    except ImportError:
-        print("Can't import LLMNR. Please ensure you have Scapy installed.")
-        pass
+    MODULES.append(CanaryLLMNR)
+
+if config.moduleEnabled("nbtns"):
+    from opencanary.modules.nameres import CanaryNBTNS
+
+    MODULES.append(CanaryNBTNS)
+
+if config.moduleEnabled("mdns"):
+    from opencanary.modules.nameres import CanaryMDNS
+
+    MODULES.append(CanaryMDNS)
 
 # NB: imports below depend on inotify, only available on linux
 if sys.platform.startswith("linux"):
