@@ -43,6 +43,7 @@ Try these out in the OpenCanary configs for more typical server personalities.
    services/windows
    services/mysql
    services/mssql
+   services/nameres
 
 
 Alerting

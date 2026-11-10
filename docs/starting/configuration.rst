@@ -27,7 +27,13 @@ Currently, OpenCanary supports faking the following services natively:
 * `tftp` - a TFTP server that alerts on requests
 * `ntp` - an NTP server that alerts on NTP requests.
 * `tcpbanner` - a TCPbanner service that alerts on connection and subsequent data received events.
+* `llmnr` - a client-side LLMNR canary that alerts when another host answers for a configured name.
+* `nbtns` - the same lookup over NetBIOS name service.
+* `mdns` - the same lookup over multicast DNS.
 * `ignorelist` - comma-separated ips or CIDRs that will ignore alerting on.
+
+The name-resolution canaries only send lookups; they never answer queries from
+other machines. See :doc:`../services/nameres` for their settings.
 
 Please note that each service may have other configurations such as `port`. For example, the `tcpbanner` service has a bunch
 of extra settings that drastically change the way, the service would interact with an attacker.
